@@ -15,30 +15,11 @@ use Horde_Mail_Rfc822_Address;
 use Horde_Mail_Rfc822_List;
 
 trait ConvertAddresses {
-	private function hordeToString(Horde_Mail_Rfc822_Address $address): string {
-		return $address->writeAddress();
-	}
-
 	private function hordeToAssoc(Horde_Mail_Rfc822_Address $address): array {
 		return [
 			'label' => $address->label,
 			'email' => $address->bare_address,
 		];
-	}
-
-	/**
-	 * Convert horde mail address list to array of strings
-	 *
-	 * @param Horde_Mail_Rfc822_List $list
-	 * @return string[]
-	 */
-	protected function hordeListToStringArray(Horde_Mail_Rfc822_List $list): array {
-		$addresses = [];
-		foreach ($list as $address) {
-			/** @psalm-suppress PossiblyNullArgument */
-			$addresses[] = $this->hordeToString($address);
-		}
-		return $addresses;
 	}
 
 	/**
